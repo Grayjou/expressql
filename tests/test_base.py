@@ -101,6 +101,17 @@ class TestSQLExpression:
         assert "first_name" in sql
         assert "last_name" in sql
 
+    def test_sql_string_unsupported_type_raises_not_implemented(self):
+        """Regression: unsupported base expression types should not raise UnboundLocalError."""
+        expr = SQLExpression(
+            None,
+            expression_type="query",
+            auto_parse_numbers=False,
+            skip_validation=True,
+        )
+        with pytest.raises(NotImplementedError):
+            expr.sql_string()
+
 
 class TestSQLComparison:
     """Test SQL comparison operations."""

@@ -281,7 +281,12 @@ class SQLExpression:
             output_str = true_value_str
         elif self.expression_type == "set":
             output_str = f"({', '.join(map(str, self.expression_value))})"
-        self._assert_not_sum_mul("SQL string")
+        else:
+            self._assert_not_sum_mul("SQL string")
+            raise NotImplementedError(
+                f"SQL string not implemented for expression type '{self.expression_type}'. "
+                "Use the dedicated expression subclass for this type."
+            )
         if include_alias:
             output_str += self.alias_str()
         return output_str
