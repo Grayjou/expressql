@@ -285,7 +285,7 @@ class SQLExpression:
             self._assert_not_sum_mul("SQL string")
             raise NotImplementedError(
                 f"SQL string not implemented for expression type '{self.expression_type}'. "
-                "Use the dedicated expression subclass for this type."
+                "You may override sql_string() for custom expression types."
             )
         if include_alias:
             output_str += self.alias_str()
